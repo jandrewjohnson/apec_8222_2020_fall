@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../:\Files\Teaching\APEC 8222 - Big Data\python_for_big_data\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/misc.xml
+/modules.xml
+/inspectionProfiles/profiles_settings.xml
+/python_for_big_data.iml
+/vcs.xml
