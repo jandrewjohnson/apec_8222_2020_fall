@@ -1,16 +1,16 @@
-# Importing packages
+## Importing packages
 
-# Built-in packages via the Python Standard Library
+### Built-in packages via the Python Standard Library
 import math
 import os, sys, time, random
 
 number_rounded_down = math.floor(4.678)
-# NOTE: From here on, output print statements will start with a comment (to deactivate them) so that your output isn't overwhelming.
+# Remember, from here on, output print statements will start with a comment (to deactivate them) so that your output isn't overwhelming.
 # when you get to a line that you actually want to see, uncomment it by deleting the #.
 
-# print(number_rounded_down)
+print('number_rounded_down', number_rounded_down)
 
-# Using packages from elsewhere
+### Using packages from elsewhere
 
 # To get a new package from the internet, for example "numpy", simply go to
 # the Conda Command line/terminal (Not this python editor, but the Conda command line we were using earlier)
@@ -30,9 +30,11 @@ small_array = np.random.randint(low, high, size)
 # print('Here\'s a small numpy array\n', small_array)
 
 # Sidenote: from above backspace \ put in front of a character is the
-# "escapce character," which makes python interpret the next thing as a string or special text operator. \n makes a line break
+# "escape character," which makes python interpret the next thing as a string or special text operator. \n makes a line break
 
 # While we're at it, also conda install pandas, scikit-learn, matplotlib
+# using command:
+# conda install panda scikit-learn matplotlib -c conda-forge
 
 
 

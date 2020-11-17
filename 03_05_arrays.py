@@ -1,3 +1,4 @@
+## Using Numpy to make and process arrays.
 
 # Numpy is the highly-optimized, super-fast workhorse that underlies much of the scientific computing stack
 # see Harris et al. 2020 in Nature for evidence.
@@ -11,39 +12,47 @@ import matplotlib.pyplot as plt
 # Create a 1 dimensional array 15 elements long. np.arange is a FAST version of python range()
 a = np.arange(15)
 
-print(a) # [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+print(a)
 
 # Reshape our array into a 2 dimensional array of size 3 by 5.
 # NOTE, numpy, and about 60% of computer programming, denotes things in terms of Row then Column (RC order)
 # but some things, especially those that regard displaying pixels, denote things as x, y (which note is CR order)
 a = np.arange(15).reshape(3, 5)
 
-print(a)
+# print(a)
 
-# [[ 0  1  2  3  4]
-#  [ 5  6  7  8  9]
-#  [10 11 12 13 14]]
+# a is an OBJECT, which has lots of useful attributes, such as:
 
 a.shape # (3, 5)
 a.ndim # 2
 a.dtype.name # 'int64'
-a.itemsize #8
 a.size # 15
+a.itemsize #8 Pro-level question. Why is it 8? Hint 8 * 8 = 64.
 type(a) # <class 'numpy.ndarray'>
 
-# Uncomment this to see what happens with error handling.
-# a = np.array(1,2,3,4)    # WRONG: TypeError: array() takes from 1 to 2 positional arguments but 4 were given
+## Creating an array
+
 a = np.array([1,2,3,4])  # RIGHT
+# a = np.array(1,2,3,4)    # WRONG: TypeError: array() takes from 1 to 2 positional arguments but 4 were given. Uncomment this to see what happens with error handling.
 
 # 2d version
 b = np.array([(1.5,2,3), (4,5,6)])
 
+# print('b\n', b)
+
+# Creating an empty array of zeros
 np.zeros((3, 4))
 
+# or ones.
 np.ones((2,3,4), dtype=np.int16 )                # dtype can also be specified
 
-c = np.empty((2,3))                                 # uninitialized
-print(c)
+# Or even faster, just "allocate the memory" with an empty matrix.
+c = np.empty((2,3))
+
+# What do you think this will produce? The empty matrix just points to memory, which means that if you look there,
+# you will just see whatever was there from before, which will likely look crazy.
+
+# print('c:\n', c)
 # array([[  3.73603959e-262,   6.02658058e-154,   6.55490914e-260],  # may vary
 #        [  5.30498948e-313,   3.14673309e-307,   1.00000000e+000]])
 
@@ -53,18 +62,21 @@ b = np.arange( 4 )
 
 c = a-b
 
-print('a', a)
-print('b', b)
-print('c', c)
+# print('a', a)
+# print('b', b)
+# print('c', c)
 
+# ** is the exponent operator in python
 d = b**2
-print('d', d)
+# print('d', d)
 
+# Numpy also has handy array-enabled math operators
 e = 10*np.sin(a)
-print('e', e)
+# print('e', e)
 
+# Con also create conditional arrays
 f = a<35
-print('f', f)
+# print('f', f)
 
 
 ## SLICING
@@ -84,16 +96,16 @@ r = a[::2]
 
 # Looping over arrays
 for i in a:
-    print(i**(1/3.))
+    r = i**(1/3.)
+    # print('r', r)
 
 # Loop to get the sum of the array
 r = 0
 for row in b:
-    print('row', row)
+    # print('row', row)
     for value in row:
-        print('value', value)
+        # print('value', value)
         r += value
-
 
 
 # NOTE: Iterating over arrays here is just for illustration as it is VERY VERY SLOW
@@ -103,6 +115,14 @@ for row in b:
 # much faster version
 
 r = b.sum()
+
+# Vectorized multiplication (and broadcasting):
+a = np.arange(20).reshape(5, 4)
+b = np.arange(20).reshape(5, 4)
+
+c = a * b # NOTE: this does element-wise multiplication, not the matrix multiplication you learned in 7-th? grade.
+
+print('c\n', c)
 
 # Plotting with matplotlib
 plt.imshow(b)
@@ -133,14 +153,10 @@ def mandelbrot(h, w, maxit=20 ):
 plt.imshow(mandelbrot(400,400))
 # plt.show()
 
+## CLASS ACTIVITY:
 
+# Create a 20 by 30 matrix of zeros, then set the upper left quadrant to 1.
 
-
-
-print('r', r)
-
-
-a[:6:2] = 1000
 
 
 
