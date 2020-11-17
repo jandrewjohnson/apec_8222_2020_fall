@@ -20,7 +20,7 @@ sum_of_two_numbers = a + b
 # Printing output to the console
 print('Our output was', sum_of_two_numbers) # You may see print output in some cases, but this is dated code.
 
-# At this point, run the script (CTRL-SHIFT F10).
+# At this point, run the script (SHIFT F10).
 
 # IDE Fun tricks (also below illustrates a multi-line string
 
