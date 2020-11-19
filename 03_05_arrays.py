@@ -110,6 +110,20 @@ r = a[::2]
 # A single colon means use the full thing.
 r = a[:]
 
+# Using slices, you can also set individual elements in the array:
+r[0] = 33
+r[1:3] = 44
+# print('r', r)
+
+# Setting in this way also can be done according to a condition:
+r[r <= 6] = 5
+# print('r', r)
+
+# Finally, an alternate and possibly more powerful way of setting conditional values is the np.where function
+# This function sets anywhere greater than 10 to be 12, otherwise it keeps it at whatever value was already in r
+r = np.where(r > 10, 12, r)
+# print('r', r)
+
 # Looping over arrays
 for i in a:
     r = i**(1/3.)
@@ -187,8 +201,8 @@ plt.imshow(mandelbrot(400, 400))
 ## CLASS ACTIVITY:
 
 # Create a 20 by 40 matrix of random values 0-1, then set the upper left quadrant to 1. Next, set the last COLUMN to 2. Plot the image.
-# Finally, change all values that were between 0.2 and 0.8 to be 3.
-# You will likely want to use the matrix slicing notation discussed above to set values.
+# Finally, change all values less than .5 to be 3.
+# You will likely want to use the matrix slicing notation discussed above to set values. i.e.,
 
 
 
