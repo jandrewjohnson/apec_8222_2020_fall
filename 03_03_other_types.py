@@ -1,10 +1,14 @@
 ## Other types
 
+# Reminder, this assumes you have setup an envioronment with conda using:
+# conda create --name py38 python=3.8
+# and that you have then activated it:
+# conda activate py38
 list_1 = [4, 5, 6]
 print('list_1', list_1)
 
 dictionary_1 = {23: "Favorite number", 24: "Second favorite number"}
-# print('dictionary_1', dictionary_1)
+print('dictionary_1', dictionary_1)
 
 # Although it is not usually best, you can run specific lines by selecting them and using the shortcut Alt-Shift-E
 # or right-click --> Run Selection.
@@ -40,13 +44,13 @@ function_output = my_function(4, 5)
 # The range() function is a python built-in that lets you iterate through a range of numbers.
 
 small_range = range(0, 10)
-# print('small_range:', small_range)
+print('small_range:', small_range)
 
 small_range_as_list = list(range(0, 10))
 # print('small_range_as_list:', small_range_as_list)
 
 big_range = range(0, 100000000000000000000000000000000000000000) # This would be over 1 dodecatillion integegers, larger than the number of atoms in the galaxy.
-# print('big_range', big_range)
+print('big_range', big_range)
 
 medium_range_as_list = list(range(0, 1000000))
 # print('medium_range_as_list:', medium_range_as_list)
@@ -62,10 +66,10 @@ num = 0
 for i in range(100, 136, 3):
     sum = sum + i
     num = num + 1
-    # print('sum', sum)
+    print('sum', sum)
 
 mean = sum / num
-# print('mean', mean)
+print('mean', mean)
 
 ## In class activity: Combine the function definition process with a loop to calculate the Sum of Squared Numbers
 # from 1 to 100

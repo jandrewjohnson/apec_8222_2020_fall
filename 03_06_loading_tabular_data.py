@@ -14,7 +14,7 @@ dates = pd.date_range('20130101', periods=6)
 
 # Creating a DataFrame by passing a NumPy array, with a datetime index and labeled columns:
 df = pd.DataFrame(np.random.randn(6, 4), columns=list('ABCD'))
-print('df:\n', df)
+# print('df:\n', df)
 
 
 df2 = pd.DataFrame({'A': 1.,
@@ -31,13 +31,25 @@ df.describe()
 
 # Also note that a dataframe is really just a numpy array dressed up with extra trappings. If you want you
 # can get back the raw array (though this might lose a lot of functionality).
-df.to_numpy()
+a = df.to_numpy()
+# print('a\n', a)
 
+# Sorting Values:
 
-# Different for index cause index is key
-df.sort_index(axis=1, ascending=False)
+# Also, I want to illustrate THE MOST COMMON MISTAKE people make with Pandas.
 
+# The sort_values method (a method is just a function attached to an object) returns a NEW modified dataframe.
+# Thus, in the line below, if you just printed df, it would not be sorted because we didn't use the returned value.
+df.sort_values(by='B')
+# print('Not sorted:\n', df)
+
+# Easy way to get around this is just to assign the returned dataframe to a variable (even the input variable)
 df = df.sort_values(by='B')
+# print('Sorted with return:\n', df)
+
+# Alternatively, if you hate returning things, there is the inplace=True command, which will modify the df ... inplace.
+df.sort_values(by='B', inplace=True)
+# print('Sorted inplace:\n', df)
 
 ## Selection/subsetting of data
 
@@ -173,20 +185,26 @@ df.to_csv('foo.csv')
 
 # Reading files:
 
-path = "../../Data/WDI_CO2_data.csv"
+# FIRST NOTE, here we are using relative paths (which you should almost always do too). the ../ means go up one level.
+# this path works if you organized your data into the folder structure I suggested.
+wdi_path = "../../Data/WDI_CO2_data.csv"
+df = pd.read_csv(wdi_path)
 
+# print('csv read as a df\n', df)
+
+# For reference, here's the Excel version
 # df = pd.read_excel('foo.xlsx', 'Sheet1', index_col=None, na_values=['NA'])
-df = pd.read_csv(path)
-# print(df)
 
 cols = list(df.columns)
 
 # Make a subset of only 2 cols
 r = df[['Country Code', '1970 [YR1970]']]
-r = r.dropna()
 # print(r)
 
-r = df.loc[df['Country Code'] == 'Can']
-print('r', r)
+r = df.loc[df['Country Code'] == 'CAN']
+# print('r', r)
+
+rr = r.loc[df['Series Name'] == 'Total greenhouse gas emissions (kt of CO2 equivalent)']
+# print(rr)
 
 # Class exercise: Plot the emissions of CO2 for Canada (or whereever I don't care).

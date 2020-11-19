@@ -32,9 +32,13 @@ small_array = np.random.randint(low, high, size)
 # Sidenote: from above backspace \ put in front of a character is the
 # "escape character," which makes python interpret the next thing as a string or special text operator. \n makes a line break
 
-# While we're at it, also conda install pandas, scikit-learn, matplotlib
+# While we're at it, also conda install pandas, scikit-learn, matplotlib, gdal
 # using command:
-# conda install panda scikit-learn matplotlib -c conda-forge
+# conda install gdal scikit-learn pandas matplotlib numpy -c conda-forge
+
+# To confirm everything worked, uncomment and run the next line. Notice that scikit-learn's name has been shortened
+import numpy, pandas, sklearn, matplotlib
+from osgeo import gdal
 
 
 
