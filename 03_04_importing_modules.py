@@ -27,7 +27,7 @@ small_array = np.random.randint(low, high, size)
 
 # TIP: Hit Ctrl-B on a definition of a function to go directly to the code
 
-# print('Here\'s a small numpy array\n', small_array)
+print('Here\'s a small numpy array\n', small_array)
 
 # Sidenote: from above backspace \ put in front of a character is the
 # "escape character," which makes python interpret the next thing as a string or special text operator. \n makes a line break

@@ -14,7 +14,7 @@ dates = pd.date_range('20130101', periods=6)
 
 # Creating a DataFrame by passing a NumPy array, with a datetime index and labeled columns:
 df = pd.DataFrame(np.random.randn(6, 4), columns=list('ABCD'))
-# print('df:\n', df)
+print('df:\n', df)
 
 
 df2 = pd.DataFrame({'A': 1.,
@@ -32,7 +32,7 @@ df.describe()
 # Also note that a dataframe is really just a numpy array dressed up with extra trappings. If you want you
 # can get back the raw array (though this might lose a lot of functionality).
 a = df.to_numpy()
-# print('a\n', a)
+print('a\n', a)
 
 # Sorting Values:
 
@@ -190,7 +190,7 @@ df.to_csv('foo.csv')
 wdi_path = "../../Data/WDI_CO2_data.csv"
 df = pd.read_csv(wdi_path)
 
-# print('csv read as a df\n', df)
+print('csv read as a df\n', df)
 
 # For reference, here's the Excel version
 # df = pd.read_excel('foo.xlsx', 'Sheet1', index_col=None, na_values=['NA'])
@@ -205,6 +205,6 @@ r = df.loc[df['Country Code'] == 'CAN']
 # print('r', r)
 
 rr = r.loc[df['Series Name'] == 'Total greenhouse gas emissions (kt of CO2 equivalent)']
-# print(rr)
+print(rr)
 
 # Class exercise: Plot the emissions of CO2 for Canada (or whereever I don't care).

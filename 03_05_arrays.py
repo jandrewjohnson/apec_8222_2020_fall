@@ -14,18 +14,21 @@ a = np.arange(15)
 
 print(a)
 
-# plt.plot(a)
-# plt.show() # As with printing, I've commented out most .show() commands to limit what gets printed. Uncomment to explore.
+plt.plot(a)
+plt.show() # As with printing, I've commented out most .show() commands to limit what gets printed. Uncomment to explore.
 
 # Reshape our array into a 2 dimensional array of size 3 by 5.
 # NOTE, numpy, and about 60% of computer programming, denotes things in terms of Row then Column (RC order)
 # but some things, especially those that regard displaying pixels, denote things as x, y (which note is CR order)
 a = np.arange(15).reshape(3, 5)
 
-# print(a)
+print(a)
 
 plt.plot(a)
-# plt.show()
+plt.show()
+
+plt.imshow(a)
+plt.show()
 
 # The above show probably is not what you expected. It has interpreted it as five different lines, but we probably meant to
 # think of it as a matrix. For this, use imshow
@@ -47,7 +50,7 @@ a = np.array([1,2,3,4])  # RIGHT
 # 2d version
 b = np.array([(1.5,2,3), (4,5,6)])
 
-# print('b\n', b)
+print('b\n', b)
 
 # Creating an empty array of zeros # NOTICE the extra paranetheses.
 np.zeros((3, 4))
@@ -65,7 +68,7 @@ c = np.empty((2,3))
 # What do you think this will produce? The empty matrix just points to memory, which means that if you look there,
 # you will just see whatever was there from before, which will likely look crazy.
 
-# print('c:\n', c)
+print('c:\n', c)
 # array([[  3.73603959e-262,   6.02658058e-154,   6.55490914e-260],  # may vary
 #        [  5.30498948e-313,   3.14673309e-307,   1.00000000e+000]])
 
@@ -75,9 +78,9 @@ b = np.arange(4)
 
 c = a-b
 
-# print('a', a)
-# print('b', b)
-# print('c', c)
+print('a', a)
+print('b', b)
+print('c', c)
 
 # ** is the exponent operator in python
 d = b**2
@@ -89,7 +92,7 @@ e = 10*np.sin(a)
 
 # Con also create conditional arrays
 f = a<35
-# print('f', f)
+print('f', f)
 
 
 ## SLICING
@@ -113,16 +116,16 @@ r = a[:]
 # Using slices, you can also set individual elements in the array:
 r[0] = 33
 r[1:3] = 44
-# print('r', r)
+print('r', r)
 
 # Setting in this way also can be done according to a condition:
 r[r <= 6] = 5
-# print('r', r)
+print('r', r)
 
 # Finally, an alternate and possibly more powerful way of setting conditional values is the np.where function
 # This function sets anywhere greater than 10 to be 12, otherwise it keeps it at whatever value was already in r
 r = np.where(r > 10, 12, r)
-# print('r', r)
+print('r', r)
 
 # Looping over arrays
 for i in a:
@@ -137,7 +140,7 @@ for row in b:
         # print('value', value)
         r += value
 
-# print('slow sum', r)
+print('slow sum', r)
 
 # NOTE: Iterating over arrays here is just for illustration as it is VERY VERY SLOW
 # and loses the magic of numpy speed. We'll learn how to bet around this later
@@ -146,7 +149,7 @@ for row in b:
 # much faster version
 
 r = b.sum()
-# print('fast sum', r)
+print('fast sum', r)
 
 # Vectorized multiplication (and broadcasting):
 a = np.arange(20).reshape(5, 4)
@@ -200,11 +203,13 @@ plt.imshow(mandelbrot(400, 400))
 
 ## CLASS ACTIVITY:
 
-# Create a 20 by 40 matrix of random values 0-1, then set the upper left quadrant to 1. Next, set the last COLUMN to 2. Plot the image.
+# Create a 20 by 40 matrix of random values 0-1, then set the upper left quadrant to 1. Next, set the last COLUMN to 2.
 # Finally, change all values less than .5 to be 3.
 # You will likely want to use the matrix slicing notation discussed above to set values. i.e.,
 
 
+a = np.random.random((40, 20))
+print(a)
 
 
 
