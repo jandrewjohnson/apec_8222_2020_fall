@@ -1,5 +1,8 @@
+# Author: Justin A Johnson. Adapted from sklearn documentation and original content. License: Modified BSD License.
+
 # Python Programming and Big-Data for Sustainability Science
-# This guide will briefly define some python basics, but then skip to libraries specific to sustainability science.
+# This guide is a shortened version of what we will cover in section 3, intended for summary and/or quick start
+# for those who know some python.
 
 
 # PYTHON BASICS
@@ -75,7 +78,7 @@ print('Here\'s a small numpy array\n', small_array)
 
 # Load a geotiff as a numpy array using GDAL
 
-import gdal
+from osgeo import gdal
 geotiff_filename = 'carbon_conserved.tif'
 
 # First, open the gdal dataset
@@ -205,25 +208,6 @@ cbar.ax.set_yticklabels(['< -1', '0', '> 1'])  # vertically oriented colorbar
 #plt.show()
 
 
-
-import pygeoprocessing.geoprocessing as gp
-
-inputs = [geotiff_filename]
-
-def multiply_by_random_int(input_array):
-    random_int = random.randint(1,300)
-    return input_array * random_int
-
-vectorize_output_uri = 'vectorize_output_' + str(random.randint(1, 1000000)) + '.tif'
-nodata_out = gp.get_nodata_from_uri(inputs[0])
-pixel_size_out = gp.get_cell_size_from_uri(inputs[0])
-
-
-
-gp.vectorize_datasets(
-    inputs, multiply_by_random_int, vectorize_output_uri, gdal.GDT_Float32,
-    nodata_out, pixel_size_out, 'intersection',
-    vectorize_op=False, assert_datasets_projected=False)
 
 
 

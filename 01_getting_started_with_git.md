@@ -1,4 +1,6 @@
-# Cheatsheet for git
+# Cheatsheet for git. 
+
+Refer to lecture PPT for fuller discussion.
 
 git init
 git add new_file.py
