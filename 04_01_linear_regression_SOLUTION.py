@@ -19,11 +19,11 @@ full_dataset = datasets.load_diabetes()
 # The standard notation for a dictionary is {key1: value1, key2: value2}
 
 # Next, looking at the keys of the database lets us dig 1 level in. we can print out just the keys.
-# print('dictionary keys:', full_dataset.keys())
+print('dictionary keys:', full_dataset.keys())
 
 # If we want, we can access just one entry in the dictionary using the key. A useful one is the key DESCR.
 # Print that out using the dictionary [] notation.
-# print(full_dataset['DESCR'])
+print(full_dataset['DESCR'])
 
 # We could also extract the data and assign
 # it to a data_array variable for inspection.
@@ -35,14 +35,14 @@ diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
 
 # Look at diabetes_X and notice there are lots of independent variables. Rather than printing the whole
 # Array, which would be messy, just look at the .shape attribute.l
-print('diabetes_X', diabetes_X.shape)
+# print('diabetes_X', diabetes_X.shape)
 
 # For now, we're just going to use a single one for simplicity. The following line extracts just the second column and
 # reshapes it to be the shape expected by the LinearRegression model. IGNORE UNDERSTANDING THIS FOR NOW if you want
 # because we will dig in to reshaping later.
 
 diabetes_X = diabetes_X[:, np.newaxis, 2]
-print('diabetes_X', diabetes_X.shape)
+# print('diabetes_X', diabetes_X.shape)
 
 # Next we are going to do a very rudimentary split of the data into training and testing sets using
 # array slice notation. The following lines assigns the last all but the last 20 lines to the TRAIN set
@@ -66,22 +66,21 @@ regression_object.fit(diabetes_X_train, diabetes_y_train)
 diabetes_y_pred = regression_object.predict(diabetes_X_test)
 
 # The predict method returned an array of numerical predictions, which we can look at.
-print('diabetes_y_pred', diabetes_y_pred)
+# print('diabetes_y_pred', diabetes_y_pred)
 
 # More interesting might be to look at the coefficients. Once the model has been fit, it has a new
 # attribute .coef_ which stores an array of coefficients. In this case it will only be an array of length
 # 1 because we just have one input.
 
-print('Coefficients: \n', regression_object.coef_)
+# print('Coefficients: \n', regression_object.coef_)
 
 # We can also use sklearn's built in evaluation functions, such as for the mean squared error
 mse = mean_squared_error(diabetes_y_test, diabetes_y_pred)
-print('Mean squared error:',  mse)
+# print('Mean squared error:',  mse)
 
 # Or perhaps we want the r2 for the second independent variable (which is the only one we used)
 r2_d2_score = r2_score(diabetes_y_test, diabetes_y_pred)
-print('Coefficient of determination:', r2_d2_score)
-
+# print('Coefficient of determination:', r2_d2_score)
 
 # Finally, to prove to ourselves that we know what we are doing, let's plot this.
 plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
@@ -90,22 +89,18 @@ plt.plot(diabetes_X_test, diabetes_y_pred, color='blue', linewidth=3)
 plt.xticks(())
 plt.yticks(())
 
-plt.show()
+# plt.show()
 
 # CLASS EXERCISE:
 # report the r2 for a LinearRegression model that uses all of the independent variables provided by the dataset.
+# Don't worry about splitting into test and train for now. Just load the whole dataset with load_diabetes(return_X_y=True).
 
-# Strangely (i think), sklearn doesn't report summary statistics in the classic, econometric
-# sense because it focuses on the train, test paradigm, which is not equivilent to a model
-# performance report (which in the classic case is only reporting performance of the TRAINING
-# data.
-
-# Nonetheless, Here's how I do it, using an alternative, more econometrics-focused package.
-# You will need to conda install statsmodel if you want to uncomment this line and have it work.
-import statsmodels
-from statsmodels.api import OLS
-
-result = OLS(full_dataset.target,full_dataset.data).fit().summary()
-print(result)
+diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
+regression_object = linear_model.LinearRegression()
+regression_object.fit(diabetes_X, diabetes_y)
+diabetes_y_pred = regression_object.predict(diabetes_X)
+r2_score = r2_score(diabetes_y, diabetes_y_pred)
+print('r2_score', r2_score)
+print('coefficients', regression_object.coef_)
 
 
