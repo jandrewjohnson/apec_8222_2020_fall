@@ -12,11 +12,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_iris
 iris_dataset = load_iris()
 
-# print('iris_dataset', iris_dataset)
+print('iris_dataset', iris_dataset)
 #
-# print("Keys of iris_dataset:", (iris_dataset.keys()))
-# print("Target names:", iris_dataset['target_names'])
-# print("Shape of data:", iris_dataset['data'].shape)
+print("Keys of iris_dataset:", (iris_dataset.keys()))
+print("Target names:", iris_dataset['target_names'])
+print("Shape of data:", iris_dataset['data'].shape)
 
 
 
@@ -34,12 +34,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 # label the columns using the strings in iris_dataset.feature_names
 iris_dataframe = pd.DataFrame(X_train, columns=iris_dataset.feature_names)
 
+print('iris_dataframe', iris_dataframe)
+
 # create a scatter matrix from the dataframe, color by y_train
 pd.plotting.scatter_matrix(iris_dataframe, c=y_train, figsize=(15, 15),
  marker='o', hist_kwds={'bins': 20}, s=60,
  alpha=.8)
 import matplotlib.pyplot as plt
-# plt.show()
+plt.show()
 
 # Here we will use a k-nearest
 # neighbors classifier, which is easy to understand. Building this model only consists of
@@ -73,11 +75,11 @@ knn.fit(X_train, y_train)
 # calculating the s
 
 X_new = np.array([[5, 2.9, 1, 0.2]])
-# print("X_new.shape: {}".format(X_new.shape))
+print("X_new.shape: {}".format(X_new.shape))
 
 prediction = knn.predict(X_new)
 
-# print("Prediction: {}".format(prediction))
+print("Prediction: {}".format(prediction))
 # print("Predicted target name: {}".format(iris_dataset['target_names'][prediction]))
 
 # Evaluating the Model
@@ -91,7 +93,7 @@ prediction = knn.predict(X_new)
 # was predicted:
 y_pred = knn.predict(X_test)
 
-# print("Test set predictions:\n {}".format(y_pred))
+print("Test set predictions:\n {}".format(y_pred))
 #
-# print("Test set score: {:.2f}".format(knn.score(X_test, y_test)))
+print("Test set score: {:.2f}".format(knn.score(X_test, y_test)))
 

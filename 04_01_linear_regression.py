@@ -95,6 +95,16 @@ plt.show()
 # CLASS EXERCISE:
 # report the r2 for a LinearRegression model that uses all of the independent variables provided by the dataset.
 
+diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
+regression_object = linear_model.LinearRegression()
+regression_object.fit(diabetes_X, diabetes_y)
+diabetes_y_pred = regression_object.predict(diabetes_X)
+r2_score = r2_score(diabetes_y, diabetes_y_pred)
+print('r2_score', r2_score)
+print('coefficients', regression_object.coef_)
+
+
+
 # Strangely (i think), sklearn doesn't report summary statistics in the classic, econometric
 # sense because it focuses on the train, test paradigm, which is not equivilent to a model
 # performance report (which in the classic case is only reporting performance of the TRAINING
