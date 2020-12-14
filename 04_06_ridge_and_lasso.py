@@ -31,7 +31,7 @@ print(feature_names)
 X = X[:150]
 y = y[:150]
 
-# Class exercise: Review of OLS. Report back the MSE when of y versus the predicted y when you use the X and y variables above.
+# Class exercise: Review of OLS. Report back the MSE  of y versus the predicted y when you use the X and y variables above.
 # You might want to utilize the scikit-learn linear regression tools, in particular the following functions:
 #
 # linear_model.LinearRegression()
@@ -51,7 +51,7 @@ from statsmodels.api import OLS
 model = OLS(y, X)
 fitted_model = model.fit()
 result = fitted_model.summary()
-# print(result)
+print(result)
 
 # Today's goal, however, is to do Lasso this same dataset.
 # To start, lets create a Lasso object. Notice that we are not
@@ -83,7 +83,7 @@ clf.fit(X, y)
 
 # The classifier object now has a variety of diagnostic metrics, reporting
 # back on different folds within the Cross Validation
-# print('clf keys returned:', clf.cv_results_.keys())
+print('clf keys returned:', clf.cv_results_.keys())
 
 # Some relevant results are as below, which we'll extract and assign to lists.
 scores = clf.cv_results_['mean_test_score']
@@ -95,12 +95,19 @@ scores_std = clf.cv_results_['std_test_score']
 # alphas and scores. save the optimal alpha as chosen_alpha.
 
 
-chosen_alpha = 0.5 # This will be set for real from class activity
+for i in range(len(scores)):
+    print('Alpha:', alphas[i], ' Score:', scores[i])
 
+# Fortunately, the authors provide a useful  best_params_ attribute.
+print('best_parameters:', clf.best_params_)
+
+# Extract the best alpha, which we will use later.
+chosen_alpha = clf.best_params_['alpha']
+print('chosen_alpha', chosen_alpha)
 # Now we can rerun a vanilla (no CV) version of Lasso with that specific alpha.
 # This will return, for instance, a .coef_ list.
 clf2 = Lasso(alpha=chosen_alpha, random_state=0, max_iter=10000).fit(X, y)
-# print("coefficients", clf2.coef_)
+print("coefficients", clf2.coef_)
 
 # Simply looking at the coefficients tells us which are to be included.
 # Question: How will we know just by looking?
@@ -109,13 +116,13 @@ clf2 = Lasso(alpha=chosen_alpha, random_state=0, max_iter=10000).fit(X, y)
 selected_coefficient_labels = []
 selected_coefficient_indices = []
 for i in range(len(clf2.coef_)):
-    # print('Coefficient', feature_names[i], 'was', clf2.coef_[i])
+    print('Coefficient', feature_names[i], 'was', clf2.coef_[i])
     if abs(clf2.coef_[i]) > 0:
         selected_coefficient_labels.append(feature_names[i])
         selected_coefficient_indices.append(i)
 
 # This process led us to the following selected_coefficient_labels:
-# print('selected_coefficient_labels', selected_coefficient_labels)
+print('selected_coefficient_labels', selected_coefficient_labels)
 
 # For fun, let's plot the alphas, scores and a confidence range.
 # What does this show us about the optimal alpha and how it varies with score?
@@ -136,15 +143,15 @@ plt.xlabel('alpha')
 plt.axhline(np.max(scores), linestyle='--', color='.5')
 plt.xlim([alphas[0], alphas[-1]])
 
-# plt.show()
+plt.show()
 
 # Finally, now that we have our selected labels, we can use them to select the numpy array
 # columns that we want to use for a post-LASSO run.
-new_x =X[:, selected_coefficient_indices]
-# print('new_x', new_x)
+new_x = X[:, selected_coefficient_indices]
+print('new_x', new_x)
 
 # Plug this new x matrix into our statsmodels OLS function and print that out.
 # How is this better than a vanilla OLS?
 result = OLS(y, new_x).fit().summary()
-# print(result)
+print(result)
 
