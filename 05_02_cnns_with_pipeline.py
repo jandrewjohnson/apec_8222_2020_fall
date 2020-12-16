@@ -30,6 +30,9 @@ alphas = np.logspace(-5, 3, 5)
 # List comprehension defines the for loop INSIDE a list.
 names = ['alpha ' + str(i) for i in alphas]
 
+print('names', names)
+
+
 # Now for the heavy lifting
 # We will create a Pipeline of transforms with a final estimator.
 

@@ -17,7 +17,11 @@ X_train, X_test, y_train, y_test = train_test_split(cancer.data, cancer.target, 
 # built-in methods within scikit-learn.
 
 # Using numpy functions, compute the mean value per feature on the training set and the STD.
+print('X_train', X_train)
+
 mean_on_train = X_train.mean(axis=0)
+
+print('mean_on_train', mean_on_train)
 std_on_train = X_train.std(axis=0)
 
 # subtract the mean, and scale by inverse standard deviation, making it  mean=0 and std=1
@@ -34,16 +38,16 @@ mlp.fit(X_train_scaled, y_train)
 # of a floating point number. The Format method then places that floating point value
 # into that placeholder.
 
-# print("Accuracy on training set: {:.3f}".format(mlp.score(X_train_scaled, y_train)))
-# print("Accuracy on test set: {:.3f}".format(mlp.score(X_test_scaled, y_test)))
+print("Accuracy on training set: {:.3f}".format(mlp.score(X_train_scaled, y_train)))
+print("Accuracy on test set: {:.3f}".format(mlp.score(X_test_scaled, y_test)))
 
 # Other concepts discussed earlier, such as regularization, also apply here.
 # To illustrate, here we will set the alpha parameter to include a regulariazation term
 mlp = MLPClassifier(max_iter=1000, alpha=1, random_state=0)
 mlp.fit(X_train_scaled, y_train)
 
-# print("Accuracy on training set: {:.3f}".format(mlp.score(X_train_scaled, y_train)))
-# print("Accuracy on test set: {:.3f}".format(mlp.score(X_test_scaled, y_test)))
+print("Accuracy on training set: {:.3f}".format(mlp.score(X_train_scaled, y_train)))
+print("Accuracy on test set: {:.3f}".format(mlp.score(X_test_scaled, y_test)))
 
 # But what does a MLP Neural Net actually LOOK like?
 # Plot the coeffs_ array to find out:
@@ -54,4 +58,4 @@ plt.yticks(range(30), cancer.feature_names)
 plt.xlabel("Columns in weight matrix")
 plt.ylabel("Input feature")
 plt.colorbar()
-# plt.show()
+plt.show()
