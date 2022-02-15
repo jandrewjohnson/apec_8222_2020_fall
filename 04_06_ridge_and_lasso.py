@@ -11,7 +11,6 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error, r2_score
 
-
 # Again we're going to use our diabetes dataset. Inspect it again just to remind yourself
 # what is in it.
 
@@ -31,7 +30,7 @@ print(feature_names)
 X = X[:150]
 y = y[:150]
 
-# Class exercise: Review of OLS. Report back the MSE  of y versus the predicted y when you use the X and y variables above.
+## Class exercise: Review of OLS. Report back the MSE  of y versus the predicted y when you use the X and y variables above.
 # You might want to utilize the scikit-learn linear regression tools, in particular the following functions:
 #
 # linear_model.LinearRegression()
@@ -39,21 +38,23 @@ y = y[:150]
 # .predict(X)
 # mean_squared_error(y, y_pred)
 
-
 # In addition to the scikit-learn OLS, we also will be using today
 # the statsmodels implementation. Let's go ahead an import it.
 # I'm assuming you've already run conda install statsmodels -c conda-forge in your
 # anaconda command line.
+
 from statsmodels.api import OLS
 
 # statsmodels uses a similar syntax to scikit learn of createing a model, fitting it, and
 # returning the summary.
+
 model = OLS(y, X)
 fitted_model = model.fit()
 result = fitted_model.summary()
+
 print(result)
 
-# Today's goal, however, is to do Lasso this same dataset.
+# Today's goal, however, is to do Lasso on this same dataset.
 # To start, lets create a Lasso object. Notice that we are not
 # setting the alpha/gamma value when we create it.
 
@@ -83,9 +84,11 @@ clf.fit(X, y)
 
 # The classifier object now has a variety of diagnostic metrics, reporting
 # back on different folds within the Cross Validation
+
 print('clf keys returned:', clf.cv_results_.keys())
 
 # Some relevant results are as below, which we'll extract and assign to lists.
+
 scores = clf.cv_results_['mean_test_score']
 scores_std = clf.cv_results_['std_test_score']
 
@@ -94,25 +97,31 @@ scores_std = clf.cv_results_['std_test_score']
 # would be to create a for loop to iterate through a range(len(scores)): object, reporting the
 # alphas and scores. save the optimal alpha as chosen_alpha.
 
-
 for i in range(len(scores)):
-    print('Alpha:', alphas[i], ' Score:', scores[i])
+    alpha = alphas[i]
+    score = scores[i]
+    print('Alpha:', alpha, ' Score:', score)
 
 # Fortunately, the authors provide a useful  best_params_ attribute.
 print('best_parameters:', clf.best_params_)
 
 # Extract the best alpha, which we will use later.
+
 chosen_alpha = clf.best_params_['alpha']
 print('chosen_alpha', chosen_alpha)
+
 # Now we can rerun a vanilla (no CV) version of Lasso with that specific alpha.
 # This will return, for instance, a .coef_ list.
+
 clf2 = Lasso(alpha=chosen_alpha, random_state=0, max_iter=10000).fit(X, y)
+
 print("coefficients", clf2.coef_)
 
 # Simply looking at the coefficients tells us which are to be included.
 # Question: How will we know just by looking?
 
 # Extract the feature names and colum indices of the features that Lasso has selected.
+
 selected_coefficient_labels = []
 selected_coefficient_indices = []
 for i in range(len(clf2.coef_)):
@@ -122,14 +131,17 @@ for i in range(len(clf2.coef_)):
         selected_coefficient_indices.append(i)
 
 # This process led us to the following selected_coefficient_labels:
+
 print('selected_coefficient_labels', selected_coefficient_labels)
 
 # For fun, let's plot the alphas, scores and a confidence range.
 # What does this show us about the optimal alpha and how it varies with score?
+
 plt.figure().set_size_inches(8, 6)
 plt.semilogx(alphas, scores)
 
 # plot error lines showing +/- std. errors of the scores
+
 std_error = scores_std / np.sqrt(n_folds)
 
 plt.semilogx(alphas, scores + std_error, 'b--')
@@ -147,11 +159,15 @@ plt.show()
 
 # Finally, now that we have our selected labels, we can use them to select the numpy array
 # columns that we want to use for a post-LASSO run.
+
 new_x = X[:, selected_coefficient_indices]
+
 print('new_x', new_x)
 
 # Plug this new x matrix into our statsmodels OLS function and print that out.
 # How is this better than a vanilla OLS?
+
 result = OLS(y, new_x).fit().summary()
+
 print(result)
 

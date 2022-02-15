@@ -36,9 +36,10 @@ print('Here\'s a small numpy array\n', small_array)
 # using command:
 # conda install gdal scikit-learn pandas matplotlib numpy -c conda-forge
 
-# To confirm everything worked, uncomment and run the next line. Notice that scikit-learn's name has been shortened
-import numpy, pandas, sklearn, matplotlib
-from osgeo import gdal
+# If you want to try out importing all the rest of the stuff we will use,
+# and confirm everything worked, uncomment and run the next line. Notice that scikit-learn's name has been shortened
+# import numpy, pandas, sklearn, matplotlib
+# from osgeo import gdal
 
 
 

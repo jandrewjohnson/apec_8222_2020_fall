@@ -1,9 +1,6 @@
 ## Other types
 
 # Reminder, this assumes you have setup an envioronment with conda using:
-# conda create --name py38 python=3.8
-# and that you have then activated it:
-# conda activate py38
 list_1 = [4, 5, 6]
 print('list_1', list_1)
 
@@ -25,7 +22,6 @@ ide_fun_tricks = """
 7.) Profiling your code (see which lines take the most time to compute.)
 8.) Keep track of a history of copy-paste items and paste from past copies. (ctrl-shift-v)
 """
-
 
 ## Functions
 
@@ -59,23 +55,35 @@ medium_range_as_list = list(range(0, 1000000))
 # big_range_as_list = list(range(0, 100000000000000000000000000000000000000000))
 # print('big_range_as_list', big_range_as_list)
 
+
+# Here is a for loop. Also note that python EXPLICITLY USES TAB-LEVEL to denote nested things.
+# I.e., the inner part of the loop is tabbed 1 level up. Python does not use { like  R.
+# I LOVE this notation and it's a big part of why python is so pretty and readable.
 sum = 0 # Set the initial variable values
 num = 0
-
-# Here is a for loop. Also note that python EXPLICITLY USES TAB-LEVEL (the inner part of the loop is tabbed 1 level up)
 for i in range(100, 136, 3):
     sum = sum + i
     num = num + 1
-    print('sum', sum)
+
+    for j in range(200, 300):
+        sum = sum * 2
 
 mean = sum / num
-print('mean', mean)
+# print('mean', mean)
 
-## In class activity: Combine the function definition process with a loop to calculate the Sum of Squared Numbers
-# from 1 to 100
-# HINT, ** is the exponent operator in python.
-#
-# BONUS: Make sure you're actually right by inserting a print statement in each step.
+## Exercise 2:
+"""Combine the function definition process with a loop to calculate the Sum of Squared Numbers
+from 1 to 100
+HINT, ** is the exponent operator in python.
+
+BONUS: Make sure you're actually right by inserting a print statement in each step.
+"""
+
+## Exercise 3:
+"""Write a Python program which iterates the integers from 1 to 50. 
+For multiples of three print "Fizz" instead of the number and for 
+the multiples of five print "Buzz". For numbers which are multiples of both three 
+and five print "FizzBuzz"."""
 
 
 

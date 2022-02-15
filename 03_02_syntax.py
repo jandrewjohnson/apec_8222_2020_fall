@@ -31,7 +31,9 @@ print('b', b)
 sum_of_two_numbers = a + b
 
 # Printing output to the console
-print('Our output was', sum_of_two_numbers)
+# print('Our output was', sum_of_two_numbers)
 
 # Now is also a good time to test out error-handling. Uncomment this if you want to see.
 # print('Our output was', sum_of_two_blunders)
+
+

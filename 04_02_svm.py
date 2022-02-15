@@ -13,8 +13,8 @@ import os
 digits = datasets.load_digits()
 
 # First, take a look at the raw python object:
-# print('digits\n', digits)
-
+print('digits\n', digits)
+#
 # Not super helpful unless you're very good at reading python dictionary notation
 # Fortunately, one of the entries in this dataset is a description. Let's read that.
 print('DESCR\n', digits['DESCR'])
@@ -31,7 +31,7 @@ plt.show()
 
 # Notice also in the dataset that there is a 'targets' attribute in the dataset.
 # This is the correct numeral that we are trying to make the model predict.
-# print('target', digits.target)
+print('target', digits.target)
 
 # Our task now is to train a model that inputs the digit images and predicts the digit numeral.
 # For this, we're going to use SVM, as discussed in lecture.
@@ -64,7 +64,7 @@ classifier = svm.SVC(gamma=0.001)
 
 # For now, let's just look at the data again. Rather than print it out, I really just want the shape
 # so that i don't get inundated with text.
-print('digits.images shape', digits.images.shape)
+# print('digits.images shape', digits.images.shape)
 
 # So we need to get it into a shape of n "samples" by 64 "features"
 n_samples = len(digits.images)
@@ -97,7 +97,7 @@ classifier.fit(X_train, y_train)
 predicted = classifier.predict(X_test)
 
 # Looking at the predicted won't be very intuitive, but you could glance.
-# print('predicted', predicted)
+print('predicted', predicted)
 
 # Let's plot a few of them in nicer format. Don't worry about learning the plotting code
 # but it's a useful example to show the power.
@@ -125,10 +125,13 @@ print("Classification report:\n", metrics.classification_report(y_test, predicte
 disp = metrics.plot_confusion_matrix(classifier, X_test, y_test)
 disp.figure_.suptitle("Confusion Matrix")
 
-print("Confusion matrix:\n", disp.confusion_matrix)
+# print("Confusion matrix:\n", disp.confusion_matrix)
 
 # Finally, show it so that you can look at it and see how good we did.
 plt.show()
+()
+
+# CLASS EXERCISE: Which digit was hardest to categorize and what was it most frequently confused as?
 
 
 

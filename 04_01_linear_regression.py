@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 # Here we will load the diabetes dataset, which is a built-in dataset from sklearn.
 full_dataset = datasets.load_diabetes()
-# print('full_dataset', full_dataset)
+print('full_dataset', full_dataset)
 
 # It's overwhelming and hard to read what is printed out, but let's dig into this notation
 # because it's frequently used and will help us understand different Python
@@ -19,30 +19,40 @@ full_dataset = datasets.load_diabetes()
 # The standard notation for a dictionary is {key1: value1, key2: value2}
 
 # Next, looking at the keys of the database lets us dig 1 level in. we can print out just the keys.
-# print('dictionary keys:', full_dataset.keys())
+print('dictionary keys:', full_dataset.keys())
 
 # If we want, we can access just one entry in the dictionary using the key. A useful one is the key DESCR.
 # Print that out using the dictionary [] notation.
-# print(full_dataset['DESCR'])
+print(full_dataset['DESCR'])
 
 # We could also extract the data and assign
 # it to a data_array variable for inspection.
 data_array = full_dataset['data']
-# print('data_array', data_array)
+print('data_array', data_array)
+
+# Class exercise: Print out the mean BMI in the dataset, the sum BMI, and the sum of the squared BMI values.
+# Explain why the sum of the squared BMI is what it is.
+
+# HINT: You will need to read the DESCR to understand which column the BMI is stored in.
+# HINT2: To create a new variable with just the desired column of the array, you can use
+# Array slicing notation like a = data_array[:, n] where the : means you want ALL rows, and the n means
+# You want just column n
+# HINT3: You may want to use np.sum(), np.mean(), and the ** exponent operator.
+
 
 # For conveinence, sklearn also just has an option to get the key parts for the regression ready to use.
 diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
 
 # Look at diabetes_X and notice there are lots of independent variables. Rather than printing the whole
 # Array, which would be messy, just look at the .shape attribute.l
-print('diabetes_X', diabetes_X.shape)
+# print('diabetes_X', diabetes_X.shape)
 
 # For now, we're just going to use a single one for simplicity. The following line extracts just the second column and
 # reshapes it to be the shape expected by the LinearRegression model. IGNORE UNDERSTANDING THIS FOR NOW if you want
 # because we will dig in to reshaping later.
 
 diabetes_X = diabetes_X[:, np.newaxis, 2]
-print('diabetes_X', diabetes_X.shape)
+# print('diabetes_X', diabetes_X.shape)
 
 # Next we are going to do a very rudimentary split of the data into training and testing sets using
 # array slice notation. The following lines assigns the last all but the last 20 lines to the TRAIN set
@@ -55,6 +65,7 @@ diabetes_y_test = diabetes_y[-20:]
 # The basic notation for sklearn is first to create a regression model object.
 # this model is "empty" in the sense that it has no coefficients identified.
 regression_object = linear_model.LinearRegression()
+print('regression_object', regression_object)
 
 # To set the coefficients, we call the regression_object's fit() method, calling the X and Y training
 # data
@@ -79,8 +90,8 @@ mse = mean_squared_error(diabetes_y_test, diabetes_y_pred)
 print('Mean squared error:',  mse)
 
 # Or perhaps we want the r2 for the second independent variable (which is the only one we used)
-r2_d2_score = r2_score(diabetes_y_test, diabetes_y_pred)
-print('Coefficient of determination:', r2_d2_score)
+r2_score_value = r2_score(diabetes_y_test, diabetes_y_pred)
+print('r2 calculated on TEST data: ', r2_score_value)
 
 
 # Finally, to prove to ourselves that we know what we are doing, let's plot this.
@@ -94,14 +105,7 @@ plt.show()
 
 # CLASS EXERCISE:
 # report the r2 for a LinearRegression model that uses all of the independent variables provided by the dataset.
-
-diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
-regression_object = linear_model.LinearRegression()
-regression_object.fit(diabetes_X, diabetes_y)
-diabetes_y_pred = regression_object.predict(diabetes_X)
-r2_score = r2_score(diabetes_y, diabetes_y_pred)
-print('r2_score', r2_score)
-print('coefficients', regression_object.coef_)
+# Is this new r2 higher or lower than what you calculated above. Why? Is this expected?
 
 
 
@@ -116,6 +120,6 @@ import statsmodels
 from statsmodels.api import OLS
 
 result = OLS(full_dataset.target,full_dataset.data).fit().summary()
-print(result)
+# print(result)
 
 
